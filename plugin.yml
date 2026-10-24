@@ -1,0 +1,13 @@
+name: CustomTools
+version: 1.2.0
+main: fr.customtools.CustomTools
+api-version: '26.2'
+description: Outils custom (marteau 3x3, houe 3x3, hache bûcheron, pioche fonte, pioche spawners) compatibles Nexo et ExcellentJobs
+softdepend: [Nexo, ExcellentJobs]
+commands:
+  ctools:
+    description: Gestion des outils custom
+    usage: /ctools <give|list|repair|reload>
+permissions:
+  customtools.admin:
+    default: op
