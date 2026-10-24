@@ -1,6 +1,6 @@
 package fr.customtools;
 
-import io.papermc.paper.event.player.PlayerItemMendEvent;
+import org.bukkit.event.player.PlayerItemMendEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
