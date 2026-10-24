@@ -1,0 +1,334 @@
+# ════════════════════════════════════════════════════════════
+#  CustomTools - configuration
+#
+#  COULEURS (name, lore, messages, durability-lore) - tous les formats se mélangent :
+#    - codes Minecraft : &a &c &l (gras) &o (italique) &n &m &k &r
+#    - couleurs HTML   : &#RRGGBB  (ex: &#00E5FF)   ou   <#RRGGBB>
+#    - MiniMessage     : <red> <bold> <gradient:#ff0000:#0000ff>texte</gradient>
+#
+#  Toute clé de "Réglages" peut être redéfinie PAR OUTIL (voir section tools).
+# ════════════════════════════════════════════════════════════
+
+# ───────────── Réglages (valeurs par défaut de tous les outils) ─────────────
+# Si true : accroupi, l'outil agit comme un outil normal (1 seul bloc)
+sneak-disables: false
+# Cache les infos "When in Main Hand / Attack Damage / Attack Speed / Mining Efficiency"
+hide-attributes: true
+# Cache la liste des enchantements dans le tooltip (ils restent bien actifs, et l'effet "brillant" est conservé).
+# Les attributs/enchantements sont ré-appliqués à la connexion, au changement de monde / serveur,
+# au respawn, à la fermeture d'un inventaire et au ramassage d'un item.
+hide-enchantments: true
+# Coût en durabilité par bloc cassé (le bloc d'origine compte aussi)
+durability-per-block: 1
+# Ligne de durabilité ajoutée au lore. Placeholders : <current> <max>
+durability-lore: "&#E87833ᴅᴜʀᴀʙɪʟɪᴛᴇ: &#FFD95C<current>&7/&#FFD95C<max>"
+# Unbreaking : chaque point de durabilité a 1/(niveau+1) chance d'être consommé
+respect-unbreaking: true
+# Avertissement en action bar quand la durabilité passe sous ce % (0 = désactivé)
+low-durability-warning-percent: 10
+
+# Houe
+require-mature: true      # ne casse que les cultures mûres
+replant: true             # replante après la récolte
+consume-seeds: true       # replanter consomme une graine de l'inventaire (sinon : casse sans replanter)
+
+# Hache
+max-logs: 256             # nombre max de bûches cassées d'un coup
+require-leaves: true      # exige des feuilles naturelles contre l'arbre
+
+# Pioche de fonte
+smelt-give-xp: true
+
+# Épée (MULTI_KILL)
+kill-count: 9             # nombre max de mobs/animaux tués par coup (le mob frappé compte)
+stack-radius: 1.5         # rayon (blocs) autour du mob frappé pour trouver les mobs empilés
+# Jamais affectés par l'épée multi-kill (les joueurs et les animaux apprivoisés ne le sont jamais)
+multi-kill-blacklist: [VILLAGER, WANDERING_TRADER]
+
+# Logs de diagnostic dans la console (pêche, durabilité...) : à laisser sur false en temps normal
+debug: false
+
+# Canne à pêche (MULTI_FISH)
+fish-count: 3             # nombre de prises par poisson ferré
+
+# Pelle / marteau : par défaut le type de blocs cassés dépend de l'outil (PICKAXE, SHOVEL, AXE, HOE)
+# selon le material. Peut être forcé par outil avec :  mineable: SHOVEL
+
+# Pioche à spawners
+spawner-durability-cost: 10   # durabilité consommée par spawner cassé
+spawner-drop-xp: false        # false = pas d'XP quand on récupère le spawner
+# Nom / lore de l'item spawner récupéré. Placeholder : <mob>
+spawner-item-name: "&#B000FFSpawner &7(&f<mob>&7)"
+spawner-item-lore:
+  - "&7Type : &f<mob>"
+
+# ───────────── Listes globales ─────────────
+# Cultures gérées par la houe -> item consommé pour replanter (AIR = replantage gratuit)
+crops:
+  WHEAT: WHEAT_SEEDS
+  CARROTS: CARROT
+  POTATOES: POTATO
+  BEETROOTS: BEETROOT_SEEDS
+  NETHER_WART: NETHER_WART
+
+# Blocs jamais cassés en zone par le marteau 3x3 (en plus des incassables et des conteneurs)
+hammer-blacklist: [SPAWNER, TRIAL_SPAWNER, VAULT, REINFORCED_DEEPSLATE, END_PORTAL_FRAME]
+# Items jamais fondus par la pioche de fonte
+smelt-blacklist: []
+
+# ───────────── Enchantements / réparation ─────────────
+# Autorise des niveaux au-dessus du max vanilla dans la section "enchantments" des outils
+ignore-level-limit: true
+# Anvil : livres enchantés autorisés, réparation bloquée
+anvil-allow-enchanted-books: true
+block-repair:
+  anvil: true         # pas de réparation (matériau ou fusion de 2 outils) à l'enclume
+  grindstone: true    # pas de fusion de 2 outils à la meule
+  crafting: true      # pas de réparation en table de craft
+# Note : le Mending est désactivé sur les outils à durabilité custom.
+# Réparation admin : /ctools repair
+
+# ───────────── Sons (clés de sons vanilla, vide = aucun) ─────────────
+sounds:
+  tool-break: "entity.item.break"
+
+# ───────────── Messages ─────────────
+messages:
+  prefix: "&8[&6CustomTools&8] &r"
+  no-permission: "&cTu n'as pas la permission."
+  usage: "&e/ctools give <joueur> <outil> [durabilité] &7| &elist &7| &erepair &7| &ereload"
+  usage-give: "&cUsage : /ctools give <joueur> <outil> [durabilité]"
+  reloaded: "&aConfiguration rechargée."
+  list: "&eOutils disponibles : &f<tools>"
+  unknown-subcommand: "&cSous-commande inconnue."
+  unknown-player: "&cJoueur introuvable."
+  unknown-tool: "&cOutil inconnu. Utilise /ctools list."
+  invalid-durability: "&cDurabilité invalide."
+  given: "&a<tool> &adonné à <player>."
+  received: "&aTu as reçu : <tool>"
+  player-only: "&cCommande réservée aux joueurs."
+  hold-tool: "&cTiens un outil custom en main."
+  repaired: "&aOutil réparé."
+  tool-broken: "&cTon outil <tool> &cs'est brisé !"
+  low-durability: "&c⚠ Durabilité faible : <current>/<max>"
+  no-seed: "&eTu n'as pas de <seed> pour replanter."
+
+# ───────────── Outils ─────────────
+# features     : HAMMER (zone) | HARVEST (récolte+replante) | TREE_CHOPPER | SMELT | SPAWNER
+#                | MULTI_KILL (épée) | MULTI_FISH (canne)   (combinables)
+#                Liste vide ([]) = outil classique : aucun pouvoir, juste une durabilité/un nom/un lore custom.
+# material     : item de base utilisé si nexo-id est vide ou introuvable
+# nexo-id      : id de l'item Nexo (texture custom). Vide = item vanilla
+# name         : nom (couleurs &, &#hex, MiniMessage). Vide = garde le nom de l'item Nexo
+# lore         : lignes de lore, affichées au-dessus de la ligne de durabilité
+# enchantments : enchantements vanilla appliqués à la création (efficiency, unbreaking, fortune...)
+# durability   : durabilité custom (0 = durabilité vanilla, non gérée par le plugin)
+# radius       : 1 = 3x3, 2 = 5x5 ...
+# Toute clé de "Réglages" (sneak-disables, max-logs, consume-seeds...) peut être ajoutée ici
+# pour surcharger la valeur par défaut de cet outil uniquement.
+tools:
+  hammer_pickaxe:
+    features: [HAMMER]
+    material: NETHERITE_PICKAXE
+    nexo-id: marteau_mythique
+    name: "&c&lᴍᴀʀᴛᴇᴀᴜ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCe marteau permet de casser"
+      - "&#FFD95Csur une zone de &#E878333x3x1&#FFD95C."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      efficiency: 5
+      unbreaking: 3
+    durability: 15000
+    radius: 1
+
+  replant_hoe:
+    features: [HARVEST]
+    material: DIAMOND_HOE
+    nexo-id: "houe_mythique"
+    name: "&c&lʜᴏᴜᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette houe permet de casser en &#E878333x3 &#FFD95Cet"
+      - "&#FFD95Creplanter &#E87833automatiquement &#FFD95Cvos plantations."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      fortune: 3
+      unbreaking: 3
+    durability: 15000
+    radius: 1
+
+  lumber_axe:
+    features: [TREE_CHOPPER]
+    material: DIAMOND_AXE
+    nexo-id: hache_mythique
+    name: "&c&lʜᴀᴄʜᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette hache permet de casser"
+      - "&#FFD95Cun &#E87833arbre &#FFD95Cen un seul coup."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      efficiency: 5
+      unbreaking: 3
+    durability: 15000
+
+  smelter_pickaxe:
+    features: [SMELT]
+    material: DIAMOND_PICKAXE
+    nexo-id: pioche_mythique
+    name: "&c&lᴘɪᴏᴄʜᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette pioche permet de &#E87833cuire &#FFD95Cdirectement"
+      - "&#FFD95Cles &#E87833blocs &#FFD95C& &#E87833minerais &#FFD95Cque vous minez."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      efficiency: 5
+      fortune: 3
+    durability: 15000
+
+  spawner_pickaxe:
+    features: [SPAWNER]
+    material: NETHERITE_PICKAXE
+    nexo-id: ""            # mets ici l'id Nexo de ta texture quand tu l'auras
+    name: "&#B000FF&lPioche à Spawners"
+    lore:
+      - ""
+      - "&7Permet de &fcasser les spawners &7et de"
+      - "&7les récupérer avec leur mob."
+    enchantments:
+      efficiency: 5
+      unbreaking: 3
+    durability: 500
+
+  # ───────────── Nouveaux outils mythiques ─────────────
+  slayer_sword:
+    features: [MULTI_KILL]
+    material: DIAMOND_SWORD
+    nexo-id: epee_mythique
+    name: "&c&lᴇᴘᴇᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette épée permet de tuer jusqu'à &#E878339 &#FFD95Cmonstres"
+      - "&#FFD95Cou animaux &#E87833empilés &#FFD95Cen un seul coup."
+      - "&#FFD95CNe fonctionne pas sur les joueurs."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      sharpness: 5
+      looting: 3
+      unbreaking: 3
+    durability: 15000
+    kill-count: 9
+
+  fishing_rod_mythic:
+    features: [MULTI_FISH]
+    material: FISHING_ROD
+    nexo-id: canne_mythique
+    name: "&c&lᴄᴀɴɴᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette canne permet de pêcher"
+      - "&#E878333 poissons &#FFD95Cen même temps."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      luck_of_the_sea: 3
+      lure: 3
+      unbreaking: 3
+    durability: 15000
+    fish-count: 3
+
+  digger_shovel:
+    features: [HAMMER]
+    material: DIAMOND_SHOVEL
+    nexo-id: pelle_mythique
+    name: "&c&lᴘᴇʟʟᴇ ᴍʏᴛʜɪqᴜᴇ"
+    lore:
+      - ""
+      - "&#FFD95CCette pelle permet de casser"
+      - "&#FFD95Csur une zone de &#E878333x3x1&#FFD95C."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
+    enchantments:
+      efficiency: 5
+      unbreaking: 3
+    durability: 15000
+    radius: 1
+
+  # ───────────── Outils classiques (aucun pouvoir) ─────────────
+  # Même système, mais "features: []" : seul le nom, le lore et la durabilité custom comptent.
+  # Pour créer une autre rareté : copie un bloc, change l'id (ex: rare_pickaxe), le name,
+  # la ligne de rareté et "durability". Tu peux aussi donner une durabilité ponctuelle :
+  #   /ctools give <joueur> classic_pickaxe 800
+  classic_sword:
+    features: []
+    material: IRON_SWORD
+    nexo-id: ""
+    name: "&fÉpée"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
+
+  classic_pickaxe:
+    features: []
+    material: IRON_PICKAXE
+    nexo-id: ""
+    name: "&fPioche"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
+
+  classic_axe:
+    features: []
+    material: IRON_AXE
+    nexo-id: ""
+    name: "&fHache"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
+
+  classic_shovel:
+    features: []
+    material: IRON_SHOVEL
+    nexo-id: ""
+    name: "&fPelle"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
+
+  classic_hoe:
+    features: []
+    material: IRON_HOE
+    nexo-id: ""
+    name: "&fHoue"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
+
+  classic_fishing_rod:
+    features: []
+    material: FISHING_ROD
+    nexo-id: ""
+    name: "&fCanne à pêche"
+    lore:
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
+    enchantments: {}
+    durability: 1500
