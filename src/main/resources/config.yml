@@ -46,7 +46,7 @@ stack-radius: 1.5         # rayon (blocs) autour du mob frappé pour trouver les
 multi-kill-blacklist: [VILLAGER, WANDERING_TRADER]
 
 # Logs de diagnostic dans la console (pêche, durabilité...) : à laisser sur false en temps normal
-debug: false
+debug: true
 
 # Canne à pêche (MULTI_FISH)
 fish-count: 3             # nombre de prises par poisson ferré
@@ -127,65 +127,71 @@ messages:
 # Toute clé de "Réglages" (sneak-disables, max-logs, consume-seeds...) peut être ajoutée ici
 # pour surcharger la valeur par défaut de cet outil uniquement.
 tools:
-  hammer_pickaxe:
+  mythique_hammer:
     features: [HAMMER]
     material: NETHERITE_PICKAXE
     nexo-id: marteau_mythique
     name: "&c&lᴍᴀʀᴛᴇᴀᴜ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCe marteau permet de casser"
-      - "&#FFD95Csur une zone de &#E878333x3x1&#FFD95C."
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&7Ce marteau permet de casser"
+      - "&7sur une zone de 3x3."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       efficiency: 5
-      unbreaking: 3
     durability: 15000
     radius: 1
 
-  replant_hoe:
+  mythique_hoe:
     features: [HARVEST]
     material: DIAMOND_HOE
     nexo-id: "houe_mythique"
     name: "&c&lʜᴏᴜᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette houe permet de casser en &#E878333x3 &#FFD95Cet"
-      - "&#FFD95Creplanter &#E87833automatiquement &#FFD95Cvos plantations."
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪɪ"
+      - ""
+      - "&7Cette houe permet de casser en 3x3 et de"
+      - "&7replanter automatiquement vos plantations."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       fortune: 3
-      unbreaking: 3
     durability: 15000
     radius: 1
 
-  lumber_axe:
+  mythique_axe:
     features: [TREE_CHOPPER]
-    material: DIAMOND_AXE
+    material: NETHERITE_AXE
     nexo-id: hache_mythique
     name: "&c&lʜᴀᴄʜᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette hache permet de casser"
-      - "&#FFD95Cun &#E87833arbre &#FFD95Cen un seul coup."
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&7Cette hache permet de casser"
+      - "&7un arbre en un seul coup."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       efficiency: 5
-      unbreaking: 3
     durability: 15000
 
-  smelter_pickaxe:
+  mythique_pickaxe:
     features: [SMELT]
-    material: DIAMOND_PICKAXE
+    material: NETHERITE_PICKAXE
     nexo-id: pioche_mythique
     name: "&c&lᴘɪᴏᴄʜᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette pioche permet de &#E87833cuire &#FFD95Cdirectement"
-      - "&#FFD95Cles &#E87833blocs &#FFD95C& &#E87833minerais &#FFD95Cque vous minez."
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪɪ"
+      - ""
+      - "&7Cette pioche permet de cuire directement"
+      - "&7les blocs & minerais que vous minez."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
@@ -196,69 +202,76 @@ tools:
   spawner_pickaxe:
     features: [SPAWNER]
     material: NETHERITE_PICKAXE
-    nexo-id: ""            # mets ici l'id Nexo de ta texture quand tu l'auras
-    name: "&#B000FF&lPioche à Spawners"
+    nexo-id: pickaxe_spawner            # mets ici l'id Nexo de ta texture quand tu l'auras
+    name: "&c&lᴘɪᴏᴄʜᴇ ᴀ sᴘᴀᴡɴᴇʀ"
     lore:
       - ""
-      - "&7Permet de &fcasser les spawners &7et de"
-      - "&7les récupérer avec leur mob."
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&7Permet de récupérer les spawners"
+      - "&7que vous cassez."
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       efficiency: 5
-      unbreaking: 3
-    durability: 500
+    durability: 15
 
   # ───────────── Nouveaux outils mythiques ─────────────
-  slayer_sword:
+  mythique_sword:
     features: [MULTI_KILL]
     material: DIAMOND_SWORD
     nexo-id: epee_mythique
     name: "&c&lᴇᴘᴇᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette épée permet de tuer jusqu'à &#E878339 &#FFD95Cmonstres"
-      - "&#FFD95Cou animaux &#E87833empilés &#FFD95Cen un seul coup."
-      - "&#FFD95CNe fonctionne pas sur les joueurs."
+      - "&#E87833• &#FFD95Csʜᴀʀᴘɴᴇss ᴠ"
+      - "&#E87833• &#FFD95Cʟᴏᴏᴛɪɴɢ ɪɪɪ"
+      - ""
+      - "&7Cette épée permet de tuer jusqu'à 3 monstres"
+      - "&7ou animaux empilés en un seul coup."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       sharpness: 5
       looting: 3
-      unbreaking: 3
     durability: 15000
-    kill-count: 9
+    kill-count: 3
 
-  fishing_rod_mythic:
+  mythique_fishing_rod:
     features: [MULTI_FISH]
     material: FISHING_ROD
     nexo-id: canne_mythique
     name: "&c&lᴄᴀɴɴᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette canne permet de pêcher"
-      - "&#E878333 poissons &#FFD95Cen même temps."
+      - "&#E87833• &#FFD95Cʟᴜᴄᴋ ᴏғ ᴛʜᴇ sᴇᴀ ɪɪɪ"
+      - "&#E87833• &#FFD95Cʟᴜʀᴇ ɪɪɪ"
+      - ""
+      - "&7Cette canne permet de pêcher"
+      - "&73 poissons en même temps."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       luck_of_the_sea: 3
       lure: 3
-      unbreaking: 3
-    durability: 15000
+    durability: 5000
     fish-count: 3
 
-  digger_shovel:
+  mythique_shovel:
     features: [HAMMER]
     material: DIAMOND_SHOVEL
     nexo-id: pelle_mythique
     name: "&c&lᴘᴇʟʟᴇ ᴍʏᴛʜɪqᴜᴇ"
     lore:
       - ""
-      - "&#FFD95CCette pelle permet de casser"
-      - "&#FFD95Csur une zone de &#E878333x3x1&#FFD95C."
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&7Cette pelle permet de casser"
+      - "&7sur une zone de 3x3."
       - ""
       - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:mythic>"
     enchantments:
       efficiency: 5
-      unbreaking: 3
     durability: 15000
     radius: 1
 
@@ -267,68 +280,272 @@ tools:
   # Pour créer une autre rareté : copie un bloc, change l'id (ex: rare_pickaxe), le name,
   # la ligne de rareté et "durability". Tu peux aussi donner une durabilité ponctuelle :
   #   /ctools give <joueur> classic_pickaxe 800
-  classic_sword:
+  epic_sword:
     features: []
-    material: IRON_SWORD
-    nexo-id: ""
-    name: "&fÉpée"
+    material: NETHERITE_SWORD
+    nexo-id: epee_epic
+    name: "&d&lᴇᴘᴇᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Csʜᴀʀᴘɴᴇss ᴠ"
+      - "&#E87833• &#FFD95Cʟᴏᴏᴛɪɴɢ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      sharpness: 5
+      looting: 3
+    durability: 7500
 
-  classic_pickaxe:
+  epic_pickaxe:
     features: []
-    material: IRON_PICKAXE
-    nexo-id: ""
-    name: "&fPioche"
+    material: NETHERITE_PICKAXE
+    nexo-id: pioche_epic
+    name: "&d&lᴘɪᴏᴄʜᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      efficiency: 5
+      fortune: 3
+    durability: 7500
 
-  classic_axe:
+  epic_axe:
     features: []
-    material: IRON_AXE
-    nexo-id: ""
-    name: "&fHache"
+    material: NETHERITE_AXE
+    nexo-id: hache_epic
+    name: "&d&lʜᴀᴄʜᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      efficiency: 5
+    durability: 7500
 
-  classic_shovel:
+  epic_shovel:
     features: []
-    material: IRON_SHOVEL
-    nexo-id: ""
-    name: "&fPelle"
+    material: NETHERITE_SHOVEL
+    nexo-id: pelle_epic
+    name: "&d&lᴘᴇʟʟᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ᴠ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      efficiency: 5
+    durability: 7500
 
-  classic_hoe:
+  epic_hoe:
     features: []
-    material: IRON_HOE
-    nexo-id: ""
-    name: "&fHoue"
+    material: NETHERITE_HOE
+    nexo-id: houe_epic
+    name: "&d&lʜᴏᴜᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      fortune: 3
+    durability: 7500
 
-  classic_fishing_rod:
+  epic_fishing_rod:
     features: []
     material: FISHING_ROD
-    nexo-id: ""
-    name: "&fCanne à pêche"
+    nexo-id: canne_epic
+    name: "&d&lᴄᴀɴɴᴇ ᴀ ᴘᴇᴄʜᴇ ᴇᴘɪᴄ"
     lore:
       - ""
-      - "&#E87833ʀᴀʀᴇᴛᴇ: &7★"
-    enchantments: {}
-    durability: 1500
+      - "&#E87833• &#FFD95Cʟᴜᴄᴋ ᴏғ ᴛʜᴇ sᴇᴀ ɪɪɪ"
+      - "&#E87833• &#FFD95Cʟᴜʀᴇ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:epic>"
+    enchantments:
+      luck_of_the_sea: 3
+      lure: 3
+    durability: 2500
+
+  rare_sword:
+    features: []
+    material: DIAMOND_SWORD
+    nexo-id: epee_rare
+    name: "&b&lᴇᴘᴇᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Csʜᴀʀᴘɴᴇss ɪᴠ"
+      - "&#E87833• &#FFD95Cʟᴏᴏᴛɪɴɢ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      sharpness: 4
+      looting: 2
+    durability: 3000
+
+  rare_pickaxe:
+    features: []
+    material: DIAMOND_PICKAXE
+    nexo-id: pioche_rare
+    name: "&b&lᴘɪᴏᴄʜᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪᴠ"
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      efficiency: 4
+      fortune: 2
+    durability: 3000
+
+  rare_axe:
+    features: []
+    material: DIAMOND_AXE
+    nexo-id: hache_rare
+    name: "&b&lʜᴀᴄʜᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪᴠ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      efficiency: 4
+    durability: 3000
+
+  rare_shovel:
+    features: []
+    material: DIAMOND_SHOVEL
+    nexo-id: pelle_rare
+    name: "&b&lᴘᴇʟʟᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪᴠ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      efficiency: 4
+    durability: 3000
+
+  rare_hoe:
+    features: []
+    material: DIAMOND_HOE
+    nexo-id: houe_rare
+    name: "&b&lʜᴏᴜᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      fortune: 2
+    durability: 3000
+
+  rare_fishing_rod:
+    features: []
+    material: FISHING_ROD
+    nexo-id: canne_rare
+    name: "&b&lᴄᴀɴɴᴇ ᴀ ᴘᴇᴄʜᴇ ʀᴀʀᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cʟᴜᴄᴋ ᴏғ ᴛʜᴇ sᴇᴀ ɪɪ"
+      - "&#E87833• &#FFD95Cʟᴜʀᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:rare>"
+    enchantments:
+      luck_of_the_sea: 2
+      lure: 2
+    durability: 1000
+
+  commune_sword:
+    features: []
+    material: DIAMOND_SWORD
+    nexo-id: epee_commune
+    name: "&a&lᴇᴘᴇᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Csʜᴀʀᴘɴᴇss ɪɪɪ"
+      - "&#E87833• &#FFD95Cʟᴏᴏᴛɪɴɢ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      sharpness: 3
+      looting: 2
+    durability: 1000
+
+  commune_pickaxe:
+    features: []
+    material: DIAMOND_PICKAXE
+    nexo-id: pioche_commune
+    name: "&a&lᴘɪᴏᴄʜᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪɪɪ"
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      efficiency: 3
+      fortune: 2
+    durability: 1000
+
+  commune_axe:
+    features: []
+    material: DIAMOND_AXE
+    nexo-id: hache_commune
+    name: "&a&lʜᴀᴄʜᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      efficiency: 3
+    durability: 1000
+
+  commune_shovel:
+    features: []
+    material: DIAMOND_SHOVEL
+    nexo-id: pelle_commune
+    name: "&a&lᴘᴇʟʟᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cᴇғғɪᴄɪᴇɴᴄʏ ɪɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      efficiency: 3
+    durability: 1000
+
+  commune_hoe:
+    features: []
+    material: DIAMOND_HOE
+    nexo-id: houe_commune
+    name: "&a&lʜᴏᴜᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cғᴏʀᴛᴜɴᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      fortune: 2
+    durability: 1000
+
+  commune_fishing_rod:
+    features: []
+    material: FISHING_ROD
+    nexo-id: canne_commune
+    name: "&a&lᴄᴀɴɴᴇ ᴀ ᴘᴇᴄʜᴇ ᴄᴏᴍᴍᴜɴᴇ"
+    lore:
+      - ""
+      - "&#E87833• &#FFD95Cʟᴜᴄᴋ ᴏғ ᴛʜᴇ sᴇᴀ ɪɪ"
+      - "&#E87833• &#FFD95Cʟᴜʀᴇ ɪɪ"
+      - ""
+      - "&#E87833ʀᴀʀᴇᴛᴇ: &f<glyph:common>"
+    enchantments:
+      luck_of_the_sea: 2
+      lure: 2
+    durability: 500
