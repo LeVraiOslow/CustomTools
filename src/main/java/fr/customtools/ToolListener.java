@@ -71,6 +71,7 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -81,10 +82,67 @@ implements Listener {
     private final ToolManager tools;
     private final Set<UUID> processing = new HashSet<UUID>();
     private final Map<UUID, Integer> lastBreakTick = new HashMap<UUID, Integer>();
+    private final Map<UUID, PermissionAttachment> spawnerPermits = new HashMap<UUID, PermissionAttachment>();
 
     public ToolListener(CustomTools plugin, ToolManager tools) {
         this.plugin = plugin;
         this.tools = tools;
+    }
+
+    /**
+     * RoseStacker (avec silk-touch-advanced-permissions) annule la casse d'un spawner si le joueur n'a pas
+     * rosestacker.nosilk.<mob> / rosestacker.silktouch.<mob>, ce qui empêchait la pioche à spawners de
+     * fonctionner. On donne donc ces permissions, pour CE coup de pioche seulement, aux joueurs qui
+     * tiennent une pioche à spawners : les autres pioches restent soumises aux restrictions.
+     */
+    @EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
+    public void onSpawnerPermit(BlockBreakEvent e) {
+        Player p = e.getPlayer();
+        UUID id = p.getUniqueId();
+        Block b = e.getBlock();
+        if (b.getType() != Material.SPAWNER || p.getGameMode() == GameMode.CREATIVE || this.processing.contains(id)) {
+            return;
+        }
+        ToolDefinition def = this.tools.fromItem(p.getInventory().getItemInMainHand());
+        if (def == null || !def.has(ToolFeature.SPAWNER)) {
+            return;
+        }
+        this.revokeSpawnerPermit(id);
+        PermissionAttachment attachment = p.addAttachment((Plugin)this.plugin);
+        EntityType type = b.getState(false) instanceof CreatureSpawner cs ? cs.getSpawnedType() : null;
+        for (String prefix : new String[]{"rosestacker.nosilk.", "rosestacker.silktouch."}) {
+            attachment.setPermission(prefix + "*", true);
+            if (type == null) continue;
+            attachment.setPermission(prefix + type.name().toLowerCase(Locale.ROOT), true);
+        }
+        this.spawnerPermits.put(id, attachment);
+        // Retiré dès la fin du traitement de l'évènement (même tick)
+        Bukkit.getScheduler().runTask((Plugin)this.plugin, () -> this.revokeSpawnerPermit(id));
+    }
+
+    private void revokeSpawnerPermit(UUID id) {
+        PermissionAttachment attachment = this.spawnerPermits.remove(id);
+        if (attachment == null) {
+            return;
+        }
+        try {
+            attachment.remove();
+        }
+        catch (IllegalArgumentException ignored) {
+            // déjà retirée (déconnexion)
+        }
+    }
+
+    /** Un item spawner vient-il déjà d'être lâché à cet endroit (par RoseStacker par exemple) ? */
+    private boolean spawnerAlreadyDropped(Block block) {
+        Location center = block.getLocation().add(0.5, 0.5, 0.5);
+        for (Entity en : block.getWorld().getNearbyEntities(center, 1.5, 1.5, 1.5, x -> x instanceof Item)) {
+            Item item = (Item)en;
+            if (item.getItemStack().getType() == Material.SPAWNER && item.getTicksLived() <= 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @EventHandler(priority=EventPriority.HIGH, ignoreCancelled=true)
@@ -243,6 +301,9 @@ implements Listener {
         if (!this.tools.flag(def, "spawner-drop-xp", false)) {
             e.setExpToDrop(0);
         }
+        if (this.spawnerAlreadyDropped(block)) {
+            return;
+        }
         block.getWorld().dropItemNaturally(block.getLocation().add(0.5, 0.5, 0.5), item);
     }
 
@@ -359,6 +420,10 @@ implements Listener {
     public void onDrops(BlockDropItemEvent e) {
         Player p = e.getPlayer();
         ToolDefinition def = this.tools.fromItem(p.getInventory().getItemInMainHand());
+        if (def != null && def.has(ToolFeature.SPAWNER) && e.getBlockState().getType() == Material.SPAWNER) {
+            // Évite un doublon avec le spawner déjà donné par onBreak
+            e.getItems().removeIf(i -> i.getItemStack().getType() == Material.SPAWNER);
+        }
         if (def == null || !def.has(ToolFeature.SMELT)) {
             return;
         }
@@ -473,6 +538,7 @@ implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         this.lastBreakTick.remove(e.getPlayer().getUniqueId());
+        this.revokeSpawnerPermit(e.getPlayer().getUniqueId());
     }
 
     // ───────────── \u00c9p\u00e9e : MULTI_KILL ─────────────
