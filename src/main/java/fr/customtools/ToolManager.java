@@ -361,6 +361,11 @@ public final class ToolManager {
         return v == null ? def.durability() : v.intValue();
     }
 
+    /** Durabilité maximale de cet exemplaire (API publique). */
+    public int maxDurability(ItemStack item, ToolDefinition def) {
+        return this.storedMax(item, def);
+    }
+
     public int remaining(ItemStack item, ToolDefinition def) {
         if (def.durability() <= 0) {
             return Integer.MAX_VALUE;
