@@ -22,6 +22,10 @@ extends JavaPlugin {
         this.getCommand("ctools").setTabCompleter((TabCompleter)cmd);
     }
 
+    public ToolManager tools() {
+        return this.tools;
+    }
+
     public Messages messages() {
         return this.messages;
     }
